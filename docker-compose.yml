@@ -2,7 +2,7 @@ version: '2'
 
 services:
   wordpress:
-    build: wordpress
+    image: daihiguchi/wordpress:latest
     links:
       - db:mysql
     environment:
@@ -11,12 +11,12 @@ services:
       - "9000:9000"
 
   db:
-    build: mariadb
+    image: daihiguchi/mariadb:latest
     environment:
       MYSQL_ROOT_PASSWORD: mysql-password
 
   nginx:
-    build: nginx
+    image: daihiguchi/nginx:latest
     volumes_from:
       - wordpress
     ports:
