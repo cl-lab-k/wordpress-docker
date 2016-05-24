@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  wordpress:
+    build: wordpress
+    links:
+      - db:mysql
+    environment:
+      WORDPRESS_DB_PASSWORD: mysql-password
+    ports:
+      - "9000:9000"
+
+  db:
+    build: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql-password
+
+  nginx:
+    build: nginx
+    volumes_from:
+      - wordpress
+    ports:
+      - "80:80"
+    links:
+      - wordpress
